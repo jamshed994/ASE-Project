@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+{% load i18n %}
+
+
+{% block body %}
+
+    <h2>Welcome back {{ user }}!</h2>
+<p> performer </p>
+    <ul>
+        <li><a href="{% url 'performer_update' %}">{% trans 'Edit your Account' %}</a></li>
+        <li><a href="{% url 'password_change' %}">{% trans 'Change your Password' %}</a></li>
+	<li><a href="{% url 'performer_logout' %}">{% trans 'Logout' %}</a></li>
+    </ul>
+
+{% endblock %}
