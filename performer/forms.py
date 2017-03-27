@@ -31,7 +31,7 @@ class PerformerCreationForm(UserCreationForm):
  
     class Meta:
         model = Performer
-        fields = ('username','email','first_name')
+        fields = ('username', 'email', 'first_name', 'last_name', 'photo', 'youtube', 'soundcloud', 'birthday', 'bio', 'gender', 'status')
 '''
  class FacebookUserCreationForm(UserCreationForm):
     Facebook_id = forms.CharField(label="Facebook Id", max_length=30, required=True,
@@ -44,7 +44,7 @@ class PerformerCreationForm(UserCreationForm):
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
-    fields, plus a repeated password."""
+    fields, plus a repeated password."
     password1 = forms.CharField(label=_('Password'), widget=forms.PasswordInput)
     password2 = forms.CharField(label=_('Password confirmation'), widget=forms.PasswordInput)
 

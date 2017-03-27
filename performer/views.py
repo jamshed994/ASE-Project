@@ -25,7 +25,7 @@ class CreateUser(CreateView):
 class CreatePerformer(CreateView):
     model = User
     form_class = PerformerCreationForm
-    success_url = reverse_lazy( 'success')
+    success_url = reverse_lazy( 'performer_detail')
     def register_account(request):
         template = 'auth/performer_signup.html'
         if request.POST:
@@ -41,7 +41,7 @@ class CreatePerformer(CreateView):
                 u.set_password(password1)
                 u.save()
 
-                return HttpResponseRedirect('auth/success.html')
+                #return HttpResponseRedirect('auth/success.html')
 
         else:
             form = PerformerCreationForm()
@@ -57,7 +57,7 @@ class CreatePerformer(CreateView):
 class CreateVenue(CreateView):
     model = User
     form_class = VenueCreationForm
-    success_url = reverse_lazy( 'venue_success')
+    success_url = reverse_lazy( 'performer_detail')
     def register_account(request):
         template = 'auth/venue_signup.html'
         if request.POST:
@@ -73,7 +73,7 @@ class CreateVenue(CreateView):
                 u.set_password(password1)
                 u.save()
 
-                return HttpResponseRedirect('auth/venue_success.html')
+                #return HttpResponseRedirect('auth/venue_success.html')
         else:
             form = VenueCreationForm()
         return render_to_response(template,

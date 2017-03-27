@@ -13,7 +13,7 @@ urlpatterns = [
     #url(r'^create/$', CreateUser.as_view(), name='performer_create'),
     url(r'^venue_success/$', CreateVenue.as_view(template_name='auth/venue_success.html'), name="venue_success"),
     url(r'^success/$', CreateVenue.as_view(template_name='auth/success.html'), name="success"),
-    url(r'^detail/$', login_required(DetailUser.as_view()), name='performer_detail'),
+    url(r'^detail/$', login_required(DetailUser.as_view(template_name='performer/performer_detail.html')), name='performer_detail'),
     url(r'^update/$', login_required(UpdateUser.as_view()), name='performer_update'),
     url(r'^logout/$', LogoutUser.as_view(), name='performer_logout'),
     url(r'^performer_signup/$', CreatePerformer.as_view(template_name='auth/performer_signup.html'), name = 'performer_create'),

@@ -30,7 +30,7 @@ class VenueAdmin(BaseUserAdmin):
 admin.site.register(Venue, VenueAdmin)
  
 class PerformerAdmin(BaseUserAdmin):
-    list_display = ('username', 'email', 'performer_id',)
+    list_display = ('username', 'email', 'first_name', 'last_name', 'photo', 'youtube', 'soundcloud', 'birthday', 'bio', 'gender', 'status','performer_id',)
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
