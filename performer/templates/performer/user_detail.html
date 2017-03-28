@@ -1,0 +1,114 @@
+
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+<div class="mainbody container-fluid">
+    <div class="row">
+       
+
+<form action="{% url 'performer_update' %}">
+    <input type="submit" value="Update Profile" />
+</form>
+<form action="yahoo.com">
+    <input type="submit" value="View Listings" />
+</form>
+
+<div>
+    <h2>Welcome back  !!</h2>
+</div>
+
+        <div style="padding-top:50px;"> </div>
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div align="center">
+                            <img class="thumbnail img-responsive" src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/15073518_10154781710804626_5440921083652280031_n.jpg?oh=54875fd5a7cfbdaaa2e1c63e91987d18&oe=5944708D" width="300px" height="300px">
+                        </div>
+                        <div class="media-body">
+                            <hr>
+                            <h3><strong>Bio</strong></h3>
+                            <p>{{ performer.bio }}</p>
+                            <hr>
+                            <h3><strong>Location</strong></h3>
+                            <p></p>
+                            <hr>
+                            <h3><strong>Gender</strong></h3>
+                            <p>{{ performer.gender }}</p>
+                            <hr>
+                            <h3><strong>Birthday</strong></h3>
+                            <p>{{ performer.birthday }}</p>
+                            <hr>
+                            <h3><strong>Email</strong></h3>
+                            <p>{{ performer.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span>
+                        <h1 class="panel-title pull-left" style="font-size:30px;">{{ performer.first_name }} {{performer.last_name}} </h1>
+                        
+                    </span>
+                    <br><br>
+                   {{ performer.status }}
+                    <br><br><hr>
+                </div>
+            </div>
+            <hr>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>Bad and Bougie</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> Our first performance on Jimmy Kimmel Live! </i></a></small></small></h4>
+                    
+                    <hr>
+
+                    <!-- Actual Post Content  -->
+                    <div class="post-content">
+                        <iframe width="560" height="315" src="{{ performer.youtube_link }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>Bad and Bougie</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> Our first performance on Jimmy Kimmel Live! </i></a></small></small></h4>
+                    
+                    <hr>
+
+                    <!-- Actual Post Content  -->
+                    <div class="post-content">
+                        <iframe width="50%" height="150" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/280186218&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+
+<script src="//lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/8f089f3a3eec5c42af192478036e7dd5.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width: 100%; border: 0; overflow: hidden;"></iframe>
+
+
+
+
+        </div>
+    </div>
+</div>
