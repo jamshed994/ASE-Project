@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+{% load i18n %}
+
+{% block body %}
+
+{% if user.type_pv == 'P' %}    
+    <h2>Welcome Performer!</h2>
+{% else %}    
+ <h2>Welcome Venue!</h2>
+{% endif %}
+
+
+<p> performer </p>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+
+        {{ form.as_p }}
+
+
+        {% if object %}
+            <input type="submit" value="{% trans 'Update' %}"/>
+        {% else %}
+            <input type="submit" value="{% trans 'Sign up' %}"/>
+        {% endif %}
+    </form>
+
+{% endblock %}
