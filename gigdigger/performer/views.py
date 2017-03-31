@@ -1,10 +1,14 @@
 
-from django.views.generic import DetailView, UpdateView, CreateView, View
+from django.views.generic import DetailView, UpdateView, CreateView, View, FormView
 from django.contrib.auth import get_user_model
 from django.contrib.auth import logout
+from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-from performer.forms import UserCreationForm, VenueUpdateForm, PerformerUpdateForm
-
+from performer.forms import UserCreationForm, VenueUpdateForm, PerformerUpdateForm, ListingCreateForm
+from django.shortcuts import render_to_response, redirect, render
+from performer.models import Listing, User
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 User = get_user_model()
 
@@ -17,7 +21,7 @@ class DetailUser(DetailView):
         return self.request.user
 
 
-class CreateUser(CreateView):
+class CreateUser(SuccessMessageMixin, CreateView):
     model = User
     form_class = UserCreationForm
 
@@ -40,3 +44,77 @@ class UpdateVenue(UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+
+def ViewListingAll(request):
+    listings = Listing.objects.all()
+    return render_to_response('listing/listall.html', {'listings': listings, 'user': request.user})
+
+def ViewEventsAll(request):
+    listings = Listing.objects.exclude(final_performer__isnull=True)
+    return render_to_response('listing/eventall.html', {'listings': listings, 'user': request.user})
+    
+def ViewMyListing(request):
+    listings = Listing.objects.filter(listing_venue=request.user) 
+    #listings = Listing.objects.all()
+    return render_to_response('listing/listmy.html', {'listings': listings})
+
+def FinalMyListing(request, listing_id):
+    model = Listing
+    liked_performers = Listing.objects.get(listing_id=listing_id).performers_liked
+    return render_to_response('listing/final.html', {'liked_performers': liked_performers, 'listing_id':listing_id})
+
+def ProfilePage(request, username):
+    p = User.objects.get(username=username)
+    return render_to_response('performer/profile.html', {'performer': p, 'user': request.user})
+
+
+
+def CreateNewListing(request):
+    model = Listing
+    success_url = reverse_lazy( 'listing_success')
+    template = 'listing/create.html'
+    if request.POST:
+        form = ListingCreateForm(request.POST)
+        print ('Starting View3')
+        if form.is_valid():
+            #form.save()
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            contact = form.cleaned_data['contact']
+            ldatetime = form.cleaned_data['ldatetime']
+            listing_id = form.cleaned_data['listing_id']
+            #venueid = User.objects.get(pk=request.user.pk)
+            u = form.save(commit=False)
+            u.listing_venue = request.user
+            #u = Listing(subject=subject, message=message, contact=contact, ldatetime=ldatetime, listing_id=listing_id, listing_venue = request.user.username)
+            u.save()
+            messages.success(request, 'You have successfully created the listing ' + listing_id)
+            return HttpResponseRedirect(success_url)
+    else:
+        print ('Starting View2')
+        form = ListingCreateForm()
+    return render(request, template, {'form': form})
+
+def RecordMyListing(request, listing_id, username):
+    l = Listing.objects.get(listing_id=listing_id)
+    p = User.objects.get(username=username)
+    l.final_performer = p
+    l.save()
+    messages.success(request, 'You have Finalized Performer for the listing ' + listing_id + ' and the performer ' + username)
+    return redirect('/performer/detail')    
+
+
+def LikeListing(request, listing_id):
+    l = Listing.objects.get(listing_id=listing_id)
+    p = User.objects.get(pk=request.user.pk)
+    if p == None:
+        return redirect('fail1')
+    l.performers_liked.add(p) 
+    l.save()
+    if p not in l.performers_liked.all():
+        return redirect('fail2')
+    messages.success(request, 'You have successfully applied for the listing ' + listing_id)
+    return redirect('/performer/detail')
+

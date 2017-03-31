@@ -1,18 +1,78 @@
-{% extends 'layouts/base.html' %}
+
+<!DOCTYPE html>
+<html>
+<title>Gigdigger</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card-2">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="/#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    {% if request.user.is_authenticated %}
+    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY PROFILE</a>
+    {% else %}
+    <a href="/performer/login/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG IN</a>
+    {% endif %}
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">SIGNUP <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="/performer/venue_signup/" class="w3-bar-item w3-button">VENUE SIGNUP</a>
+         <a href="/performer/performer_signup/" class="w3-bar-item w3-button">PERFORMER SIGNUP</a>
+      </div>
+    </div>
+<a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:50px">
+
+  <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" id="band">
+    <h2 class="w3-wide">GigDigger</h2>
+    <p class="w3-opacity"><i>We connect Venues with talented aspiring Performers</i></p>
+    <!-- <div class="w3-row w3-padding-32">
+      <div class="w3-third">
+        <p>Name</p>
+        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>Name</p>
+        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>Name</p>
+        <img src="/w3images/bandmember.jpg" class="w3-round" alt="Random Name" style="width:60%">
+      </div>
+    </div> -->
 {% load i18n %}
 
 {% block body %}
-
-    <h2>Welcome! venue!!!</h2>
-<p> performer </p>
+<div style="border: 1px solid #c0c0c0; margin: 0 2px; padding: .35em .625em .75em;">
+<h2 class="w3-opacity" >Welcome Venue!</h2>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+
         {% if object %}
             <input type="submit" value="{% trans 'Update' %}"/>
         {% else %}
             <input type="submit" value="{% trans 'Sign up' %}"/>
         {% endif %}
     </form>
-
+<div>
 {% endblock %}
+
+  </div>
+
+</body>
+</html>

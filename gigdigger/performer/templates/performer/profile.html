@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<title>Gigdigger</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="/performer/templates/listing/style_list.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+<body>
+
+<!-- Navbar -->
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card-2">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="/#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    {% if user.is_authenticated %}
+    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY PROFILE</a>
+    {% else %}
+    <a href="/performer/login/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG IN</a>
+    {% endif %}
+    <a href="/performer/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">SIGNUP <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="/performer/venue_signup/" class="w3-bar-item w3-button">VENUE SIGNUP</a>
+         <a href="/performer/performer_signup/" class="w3-bar-item w3-button">PERFORMER SIGNUP</a>
+      </div>
+    </div>
+    <a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+
+
+  </div>
+</div>
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<!-- <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css"> -->
+<div class="mainbody container-fluid" style="float:center">
+    <div class="row">
+       
+
+        <div style="padding-top:50px;"> </div>
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div align="center">
+                            <img class="thumbnail img-responsive" src= "{{ performer.photo }}" width="300px" height="300px">
+                        </div>
+                        <div class="media-body">
+                            <hr>
+                            <h3><strong>Bio</strong></h3>
+                            <p>{{ performer.bio }}</p>
+                            <hr>
+                            <h3><strong>Location</strong></h3>
+                            <p>{{ performer.location }}</p>
+                            <hr>
+                            <h3><strong>Gender</strong></h3>
+                            <p>{{ performer.gender }}</p>
+                            <hr>
+                            <h3><strong>Email</strong></h3>
+                            <p>{{ performer.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span>
+                        <h1 class="panel-title pull-left" style="font-size:30px;"><strong>{{ performer.first_name }} {{performer.last_name}} </strong></h1>
+                        
+                    </span>
+                    <br><br>
+                   {{ performer.status }}
+                    <br><br><hr>
+                </div>
+            </div>
+            <hr>
+
+
+            {% if performer.youtube_link1 != '' %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <!-- <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;"> -->
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>{{ performer.y1d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i  aria-hidden="true"></i> </i></a></small></small></h4>
+                    
+                    <hr>
+
+                    <!-- Actual Post Content  -->
+                    <div class="post-content">
+                        <iframe width="560" height="315" src="{{ performer.youtube_link1 }}" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+
+            {%endif %}
+
+            {% if performer.soundcloud1 != "" %}
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <!-- <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;"> -->
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>{{ performer.s1d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i  aria-hidden="true"></i></i></a></small></small></h4>
+                    
+                    <hr>
+                    <!-- Actual Post Content  -->
+                    <div class="post-content">
+
+
+
+
+                         <iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url={{ performer.soundcloud1 }}&auto_play=false&color=915f33&theme_color=00FF00"></iframe>
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+
+            {% endif %}
+
+
+            {% if performer.youtube_link2 != '' %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <!-- <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;"> -->
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>{{ performer.y12 }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i  aria-hidden="true"></i> </i></a></small></small></h4>
+                    
+                    <hr>
+
+                    <!-- Actual Post Content  -->
+                    <div class="post-content">
+                        <iframe width="560" height="315" src="{{ performer.youtube_link2 }}" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+
+            {%endif %}
+
+            {% if performer.soundcloud2 != "" %}
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <!-- <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;"> -->
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>{{ performer.s2d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i  aria-hidden="true"></i></i></a></small></small></h4>
+                    
+                    <hr>
+                    <!-- Actual Post Content  -->
+                    <div class="post-content">
+
+
+
+
+                         <iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url={{ performer.soundcloud2 }}&auto_play=false&color=915f33&theme_color=00FF00"></iframe> 
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+
+            {% endif %}
+
+
+            {% if performer.youtube_link3 != '' %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <!-- <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;"> -->
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>{{ performer.y3d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i  aria-hidden="true"></i> </i></a></small></small></h4>
+                    
+                    <hr>
+
+                    <!-- Actual Post Content  -->
+                    <div class="post-content">
+                      <iframe width="560" height="315" src="{{ performer.youtube_link3 }}" frameborder="0" allowfullscreen></iframe> 
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+
+            {%endif %}
+
+            {% if performer.soundcloud3 != "" %}
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <!-- <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;"> -->
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>{{ performer.s3d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i aria-hidden="true"></i></i></a></small></small></h4>
+                    
+                    <hr>
+                    <!-- Actual Post Content  -->
+                    <div class="post-content">
+
+
+
+
+                         <iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url={{ performer.soundcloud3 }}&auto_play=false&color=915f33&theme_color=00FF00"></iframe> 
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+
+ 
+</body>
+</html>

@@ -21,11 +21,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         _('username'),
         max_length=30,
         unique=True,
-        help_text=_('Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        help_text=_('<br /> Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.'), 
         validators=[validators.RegexValidator(r'^[\w.@+-]+$', _('Enter a valid username.'), 'invalid')]
     )
 
-    type_pv = models.CharField(_('Type: '), max_length=1, blank=True)
+    type_pv = models.CharField(_('Type: '), help_text=_('<br /> Chose P for Performer, V for Venue'), max_length=1, blank=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
 
@@ -35,13 +35,25 @@ class User(AbstractBaseUser, PermissionsMixin):
     status = models.CharField(_('status'), max_length=50, blank=True)
 
 
-    youtube = models.CharField(_('youtube link'), max_length=100, blank=True)
-    soundcloud = models.CharField(_('soundcloud link'), max_length=100, blank=True)
+    youtube1 = models.CharField(_('youtube1 link'), max_length=100, blank=True)
+    youtube2 = models.CharField(_('youtube2 link'), max_length=100, blank=True)
+    youtube3 = models.CharField(_('youtube3 link'), max_length=100, blank=True)
+    soundcloud1 = models.CharField(_('soundcloud1 link'), max_length=100, blank=True)
+    soundcloud2 = models.CharField(_('soundcloud2 link'), max_length=100, blank=True)
+    soundcloud3 = models.CharField(_('soundcloud3 link'), max_length=100, blank=True)
+
+    y1d = models.CharField(_('Youtube 1 Description'), max_length=100, blank=True)
+    y2d = models.CharField(_('Youtube 2 Description'), max_length=100, blank=True)
+    y3d = models.CharField(_('Youtube 3 Description'), max_length=100, blank=True)
+    s1d = models.CharField(_('Soundcloud 1 Description'), max_length=100, blank=True)
+    s2d = models.CharField(_('Soundcloud 2 Description'), max_length=100, blank=True)
+    s3d = models.CharField(_('Soundcloud 3 Description'), max_length=100, blank=True)
+
+
     location = models.CharField(_('location string'), max_length=30, blank=True)
     email = models.EmailField(_('email address'), blank=True)
 
-    photo = models.ImageField(upload_to='users', blank=True, null=True)
-
+    photo = models.CharField(_('photo link'), max_length=200, blank=True, null=True)
 
     capacity = models.CharField(_('capacity string'), max_length=30, blank=True)
     description = models.CharField(_('description string'), max_length=30, blank=True)
@@ -75,15 +87,29 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.get_full_name()
 
     @property
-    def youtube_link(self):
-        return self.get_youtube_link()
+    def youtube_link1(self):
+        return self.get_youtube_link1()
+
+    def get_youtube_link1(self):
+        return self.youtube1.replace('watch?v=', 'embed/')
+
+    @property
+    def youtube_link2(self):
+        return self.get_youtube_link2()
+
+    def get_youtube_link2(self):
+        return self.youtube2.replace('watch?v=', 'embed/')
+
+    @property
+    def youtube_link3(self):
+        return self.get_youtube_link3()
+
+    def get_youtube_link3(self):
+        return self.youtube3.replace('watch?v=', 'embed/')
 
     def get_absolute_url(self):
         return settings.LOGIN_REDIRECT_URL
 
-
-    def get_youtube_link(self):
-        return self.youtube.replace('watch?v=', 'embed/')
 
     def get_full_name(self):
         """
@@ -101,3 +127,23 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+class Listing(models.Model):
+    listing_id = models.CharField(
+        _('listing_id'),
+        max_length=30,
+        unique=True,
+        help_text=_('<br /> Required. 30 characters or fewer. Letters and digits and only.'), 
+        validators=[validators.RegexValidator(r'^[\w]+$', _('Enter a valid listing_id.'), 'invalid')]
+    )
+    listing_id = models.CharField(max_length=30, primary_key=True)
+    subject = models.CharField(max_length=100)
+    message = models.CharField(max_length=500)
+    contact = models.EmailField()
+    ldatetime = models.DateTimeField(default=None, blank=True, null=True)
+    listing_venue = models.ForeignKey(User, related_name="listing_venue")
+    performers_liked = models.ManyToManyField(User,  related_name="performers_liked")
+    final_performer = models.ForeignKey(User, models.SET_NULL, blank=True, null=True, related_name="final_performer")
+    class Meta:
+        verbose_name = 'Listing'

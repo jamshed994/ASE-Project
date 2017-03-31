@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import ugettext_lazy as _
 
-from performer.models import User
+from performer.models import User, Listing
+from performer.forms import ListingCreateForm
 
 
 class UserAdmin(BaseUserAdmin):
@@ -16,7 +17,7 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('username', 'password')}),
 
         (_('Personal info'), {
-            'fields': (('first_name', 'last_name'), 'email', 'photo', 'youtube', 'soundcloud', 'location')}),
+            'fields': (('first_name', 'last_name'), 'email', 'photo', 'location')}),
 
         (_('Important dates'), {
             'fields': (('last_login', 'date_joined'),)}),
@@ -28,3 +29,10 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
+
+class ListingAdmin(admin.ModelAdmin):
+    list_display = ('subject', 'listing_id', 'listing_venue')
+    fields = ('subject', 'message', 'contact', 'ldatetime', 'listing_venue', 'listing_id', 'performers_liked', 'final_performer')
+    form = ListingCreateForm
+ 
+admin.site.register(Listing, ListingAdmin)

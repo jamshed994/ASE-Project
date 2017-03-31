@@ -3,7 +3,8 @@ from django import forms
 
 from django.utils.translation import ugettext as _
 
-from performer.models import User
+from performer.models import User, Listing
+import datetime
 
 
 class UserCreationForm(forms.ModelForm):
@@ -37,7 +38,7 @@ class UserCreationForm(forms.ModelForm):
 class PerformerUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'photo', 'youtube', 'soundcloud', 'location', 'birthday', 'bio', 'gender', 'status')
+        fields = ('username', 'email', 'first_name', 'last_name', 'photo', 'youtube1','y1d', 'youtube2', 'y2d', 'youtube3', 'y3d', 'soundcloud1','s1d','soundcloud2','s2d','soundcloud3','s3d','location', 'birthday', 'bio', 'gender', 'status')
 
 
 
@@ -46,6 +47,18 @@ class VenueUpdateForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'photo', 'location', 'bio', 'status', 'capacity', 'description', 'address', 'venue_name')
 
+
+class ListingCreateForm(forms.ModelForm):
+    subject = forms.CharField(max_length=100)
+    message = forms.CharField(widget=forms.Textarea)
+    contact = forms.EmailField()
+    ldatetime = forms.DateTimeField(initial=datetime.datetime.today)
+    listing_id = forms.CharField(max_length=30)
+    #listing_venue = forms.CharField(max_length=30)
+    print ('Starting Form1')
+    class Meta:
+        model = Listing
+        fields = ('subject', 'message', 'contact' , 'ldatetime' , 'listing_id' )
 
 
 

@@ -1,16 +1,81 @@
-{% extends 'layouts/base.html' %}
+
+<!DOCTYPE html>
+<html>
+<title>Gigdigger</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card-2">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+
+    {% if user.type_pv == 'P' %}
+
+    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large">MY PROFILE</a>
+    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW LISTINGS</a>
+    <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
+    <a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+
+
+
+
+
+
+    {% else %}
+
+    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large">MY PROFILE</a>
+<a href="{% url 'listing_new' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CREATE LISTING</a>
+<a href="{% url 'my_listing' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY LISTINGS</a>
+    <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
+    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+
+
+    {% endif %}
+
+
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:50px">
+
+  <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" id="band">
+    <h2 class="w3-wide">GigDigger</h2>
+    <p class="w3-opacity"><i>We connect Venues with talented aspiring Performers</i></p>
+    <!-- <div class="w3-row w3-padding-32">
+      <div class="w3-third">
+        <p>Name</p>
+        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>Name</p>
+        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>Name</p>
+        <img src="/w3images/bandmember.jpg" class="w3-round" alt="Random Name" style="width:60%">
+      </div>
+    </div> -->
 {% load i18n %}
 
 {% block body %}
-
+<div style="border: 1px solid #c0c0c0; margin: 0 2px; padding: .35em .625em .75em;">
 {% if user.type_pv == 'P' %}    
-    <h2>Welcome Performer!</h2>
+    <h2 class="w3-opacity">Welcome Performer!</h2>
 {% else %}    
- <h2>Welcome Venue!</h2>
+ <h2 class="w3-opacity">Welcome Venue!</h2>
 {% endif %}
 
 
-<p> performer </p>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -24,5 +89,10 @@
             <input type="submit" value="{% trans 'Sign up' %}"/>
         {% endif %}
     </form>
-
 {% endblock %}
+
+  </div>
+</div>
+
+</body>
+</html>
