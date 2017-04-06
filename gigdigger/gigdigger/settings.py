@@ -53,7 +53,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'performer',
+    'django_nose',
     #'venue',
+]
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=gigdigger,performer',
 ]
 
 MIDDLEWARE = [
