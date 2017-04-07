@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from performer.models import User
 from django.test import RequestFactory
-from performer.views import CreateNewListing
+from performer.views import CreateNewListing,LikeListing
 from performer.models import Listing
 from performer.forms import UserCreationForm,PerformerUpdateForm
 
@@ -48,6 +48,30 @@ class UserModelTest(TestCase):
     	field_label = entry.listing_venue.first_name
     	self.assertEquals(field_label,'Big')
 
+    def test_listing_class(self):
+        a=User.objects.create(first_name='Big', last_name='Bob',username='BigBob')
+        a.save()
+        x=Listing.objects.create(subject='test_subject', listing_id='12345', contact='test_contact',message='test_message',listing_venue=a,)
+        x.save()
+        cat = Listing.objects.get(listing_id="12345")
+        field_label=cat.subject
+        #self.assertEquals(field_label,'test_subject')
+        entry = Listing(listing_id="12345")
+
+        self.assertEqual(str("test_subject"),field_label )
+
+    def test_names(self):
+       a=User.objects.create(first_name='Big', last_name='Bob',username='BigBob')
+       a.save()
+       user=User.objects.get(username='BigBob')
+       field_label = user.first_name
+       fm=user.get_full_name()
+       sn=user.get_short_name()
+       sc3=user.get_youtube_link3()
+       self.assertEquals(field_label,'Big')
+
+
+
 
 class ViewTest(TestCase):
 	#View Test 1
@@ -58,9 +82,27 @@ class ViewTest(TestCase):
 	#View Test 2
 	def test_create_listing(self):
 		request_factory = RequestFactory()
-		request = request_factory.post('listing/create', data={'subject':"fbsjkfbksbfj",'listing_id':"318959"})
+		request = request_factory.post('listing/create', data={'subject':"fbsjkfbksbfj",'listing_id':"318959",'message':'iufbnsdjndskj'})
 		response= CreateNewListing(request)
-		self.assertEquals(response.status_code,200)
+		self.assertEquals(response.status_code,200)    
+    
+    # def test_create_listing1(self):
+    #     request_factory = RequestFactory()
+    #     request = request_factory.post('listing/create', data={'subject':"fbsjkfbksbfj",'listing_id':"318959",'message':'iufbnsdjndskj'})
+    #     response= CreateNewListing(request)
+    #     self.assertEquals(response.status_code,200)
+
+	def test_LikeListing(self):
+		request_factory = RequestFactory()
+		a=User.objects.create(first_name='Big12', last_name='Bob',username='venue1234456')
+		a.save()
+		b=User.objects.create(first_name='Big', last_name='Bob',username='BigBob')
+		b.save()
+		request = RequestFactory().post('listing/create', data={'subject':'fbsjkfbksbfj','listing_id':'318959','message':'iufbnsdjndskj', 'listing_venue':'venue1234456'})
+		response= CreateNewListing(request)
+		self.assertEquals(response.status_code,200)   
+		request = RequestFactory().post('listing/create',data={'user':"BigBob"})
+		#response= LikeListing(request, listing_id='318959')
 
 class FormTest(TestCase):
 	#Form Test 1
