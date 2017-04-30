@@ -27,27 +27,13 @@ body {font-family: "Lato", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card-2">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="/#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-    {% if request.user.is_authenticated or user.is_authenticated%}
-    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY PROFILE</a>
-    {% else %}
-    <a href="/performer/login/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG IN</a>
-    
-    <div class="w3-dropdown-hover w3-hide-small">
-      <button class="w3-padding-large w3-button" title="More">SIGNUP <i class="fa fa-caret-down"></i></button>     
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="/performer/venue_signup/" class="w3-bar-item w3-button">VENUE SIGNUP</a>
-         <a href="/performer/performer_signup/" class="w3-bar-item w3-button">PERFORMER SIGNUP</a>
-      </div>
-    </div>
-    {% endif %}
 
-    <a href="/performer/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
-    
-<a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
-    {% if request.user.is_authenticated or user.is_authenticated%}
-    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right	">{{ user.first_name|upper }}</a>
-    {% endif %}
+    <a href="{% url 'performer_update' %}" class="w3-bar-item w3-button w3-padding-large">UPDATE PROFILE</a>
+    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW LISTINGS</a>
+    <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
+    <a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+
+
   </div>
 </div>
 
@@ -73,45 +59,45 @@ body {font-family: "Lato", sans-serif}
     </div> -->
 
 <div style="border: 1px solid #c0c0c0; margin: 0 2px; padding: .35em .625em .75em;">
-<p class="w3-opacity" >All Finalized Events</p>
+<h2 class="w3-opacity" >Welcome Performer!</h2>
+</br>
+<p class="w3-opacity" >All Available Listings</p>
 </br>
 </br>
 {% block body %}
 <div class="row">
 
       {% for listing in listings %}
-        <div class="col-sm-4" >
+        <div class="col-sm-4"  >
             <div class="thumbnail" style="height:600px">
                 <img class="group list-group-image" src="{{ listing.listing_venue.photo }}" alt="" />
                 <div class="w3-opacity;    word-wrap: break-word;   width: 100px;">
                     <h4 >
                         Subject: {{ listing.subject }}</h4>
                     <p >
-                        Message: {{ listing.message|truncatechars:25 }}</p>
+                        Message: {{ listing.message.message|truncatechars:25 }}</p>
 		    <p >
                         Contact: {{ listing.contact }}</p>
 		    <p >
                         Venue-id: {{ listing.listing_venue.username }}</p>
 		    <p >
-                        Date-time: {{ listing.ldatetime }}</p>
+                        date-time: {{ listing.ldatetime }}</p>
                     <div>
                                 <p>Listing-Id: {{ listing.listing_id }}</p>
                         <div >
-			
-		    <p >
-                        Performer: {{ listing.final_performer.first_name }} {{ listing.final_performer.last_name }}</p>
-		    
-		    <a 
+			{% if user not in listing.performers_liked.all %}
+                            <a 
 				    class="btn btn-info" 
-				    href="/performer/profile/{{listing.final_performer.username}}">
-				    View Performer
+				    href="listing_like/{{ listing.listing_id }}">
+				    Apply
 				</a>
-			<br> <br>
-		  <a 
+			{% else %}
+				<p
 				    class="btn btn-info" 
-				    href="/performer/explore/{{listing.listing_venue.username }}">
-				    Explore Venue
-				</a>
+				    >
+				    Appied
+				</p>
+			{% endif %}
                         </div>
                     </div>
                 </div>
@@ -127,31 +113,55 @@ body {font-family: "Lato", sans-serif}
   </div>
 
 <!--
-I am driving up 85 in the
-Kind of morning that lasts all afternoon
-I'm just stuck inside the gloom
-4 more exits to my apartment but
-I am tempted to keep the car in drive
-And leave it all behind
-'Cause I wonder sometimes
-About the outcome
-Of a still verdictless life
-Am I living it right?
-Am I living it right?
-Am I living it right?
-Why, why Georgia, why?
-I rent a room and I fill the spaces with
-Wood in places to make it feel like home
-But all I feel's alone
-It might be a quarter life crisis
-Or just the stirring in my soul
-Either way I wonder sometimes
-About the outcome
-Of a still verdictless life
-Am I living it right?
-Am I living it right?
-Am I living it right?
-Why, why Georgia, why?
+
+Suitcase in my hand
+Jack is in his corset, and jane is her vest,
+And me Im in a rocknroll band hah!
+Ridin in a stutz bear cat, jim
+You know, those were different times!
+Oh, all the poets they studied rules of verse
+And those ladies, they rolled their eyes
+
+Sweet jane! whoa! sweet jane, oh-oh-a! sweet jane!
+
+Ill tell you something
+Jack, he is a banker
+And jane, she is a clerk
+Both of them save their monies, ha
+And when, when they come home from work
+Oh, sittin down by the fire, oh!
+The radio does play
+The classical music there, jim
+The march of the wooden soldiers
+All you protest kids
+You can hear jack say, get ready, ah
+
+Sweet jane! come on baby! sweet jane! oh-oh-a! sweet jane!
+
+Some people, they like to go out dancing
+And other peoples, they have to work, just watch me now!
+And theres even some evil mothers
+Well theyre gonna tell you that everything is just dirt
+Yknow that, women, never really faint
+And that villains always blink their eyes, woo!
+And that, yknow, children are the only ones who blush!
+And that, life is just to die!
+And, everyone who ever had a heart
+They wouldnt turn around and break it
+And anyone who ever played a part
+Oh wouldnt turn around and hate it!
+
+Sweet jane! whoa-oh-oh! sweet jane! sweet jane!
+
+Heavenly wine and roses
+Seems to whisper to her when he smiles
+Heavenly wine and roses
+Seems to whisper to her when she smiles
+La lala lala la, la lala lala la
+Sweet jane
+Sweet jane
+Sweet jane
+
 -->
 
 </body>

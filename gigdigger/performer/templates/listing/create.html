@@ -14,17 +14,27 @@ body {font-family: "Lato", sans-serif}
 <body>
 
 <!-- Navbar -->
+
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card-2">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+
     <a href="{% url 'venue_update' %}" class="w3-bar-item w3-button w3-padding-large">UPDATE PROFILE</a>
 <a href="{% url 'listing_new' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CREATE LISTING</a>
 <a href="{% url 'my_listing' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY LISTINGS</a>
+<a href="{% url 'event_my' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY EVENTS</a>
     <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
-    <a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+    
+
+    {% if request.user.is_authenticated %}
+    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right	">{{ user.first_name|upper }}</a>
+    {% endif %}
 
   </div>
 </div>
+
+
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:50px">
@@ -59,6 +69,22 @@ body {font-family: "Lato", sans-serif}
 {% endblock %}
 
   </div>
+
+<!-- 
+
+Why's it so strange when they say that the world's movin upwards?
+Why's it surreal when my hands feel they cant roll the dice?
+Why's it so great just to wake every day, alive and by your side.
+It's a mystery I guess, there's lots of things I cant find.
+Its not the way that you look, but your move that catches my eye.
+Why's it so soft when the cannons unload on the others?
+Why're we so loud when we say it wont happen to us?
+Why does my mind blow to bits every time they play that song?
+It's just the way that he sings,
+Not the words that he says, or the band.
+I'm in love with this soul, it's a meaning that I understand.
+
+-->
 
 </body>
 </html>

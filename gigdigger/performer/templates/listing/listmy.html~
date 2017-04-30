@@ -1,7 +1,5 @@
 
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,27 +25,18 @@ body {font-family: "Lato", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card-2">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="/#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-    {% if request.user.is_authenticated or user.is_authenticated%}
-    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY PROFILE</a>
-    {% else %}
-    <a href="/performer/login/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG IN</a>
-    
-    <div class="w3-dropdown-hover w3-hide-small">
-      <button class="w3-padding-large w3-button" title="More">SIGNUP <i class="fa fa-caret-down"></i></button>     
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="/performer/venue_signup/" class="w3-bar-item w3-button">VENUE SIGNUP</a>
-         <a href="/performer/performer_signup/" class="w3-bar-item w3-button">PERFORMER SIGNUP</a>
-      </div>
-    </div>
-    {% endif %}
 
-    <a href="/performer/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
-    
-<a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
-    {% if request.user.is_authenticated or user.is_authenticated%}
+
+    <a href="{% url 'venue_update' %}" class="w3-bar-item w3-button w3-padding-large">UPDATE PROFILE</a>
+<a href="{% url 'listing_new' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CREATE LISTING</a>
+<a href="{% url 'my_listing' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY LISTINGS</a>
+    <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
+    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+
+    {% if request.user.is_authenticated %}
     <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right	">{{ user.first_name|upper }}</a>
     {% endif %}
+
   </div>
 </div>
 
@@ -71,16 +60,17 @@ body {font-family: "Lato", sans-serif}
         <img src="/w3images/bandmember.jpg" class="w3-round" alt="Random Name" style="width:60%">
       </div>
     </div> -->
-
+<div style="margin-top:40px">
 <div style="border: 1px solid #c0c0c0; margin: 0 2px; padding: .35em .625em .75em;">
-<p class="w3-opacity" >All Finalized Events</p>
+</br>
+<h2 class="w3-opacity" >All My Listings</h2>
 </br>
 </br>
 {% block body %}
 <div class="row">
 
       {% for listing in listings %}
-        <div class="col-sm-4" >
+        <div class="col-sm-4">
             <div class="thumbnail" style="height:600px">
                 <img class="group list-group-image" src="{{ listing.listing_venue.photo }}" alt="" />
                 <div class="w3-opacity;    word-wrap: break-word;   width: 100px;">
@@ -93,25 +83,37 @@ body {font-family: "Lato", sans-serif}
 		    <p >
                         Venue-id: {{ listing.listing_venue.username }}</p>
 		    <p >
-                        Date-time: {{ listing.ldatetime }}</p>
+                        date-time: {{ listing.ldatetime }}</p>
                     <div>
                                 <p>Listing-Id: {{ listing.listing_id }}</p>
-                        <div >
+                    <div >
+			<hr>
+			{% if not listing.final_performer %}
 			
 		    <p >
-                        Performer: {{ listing.final_performer.first_name }} {{ listing.final_performer.last_name }}</p>
-		    
-		    <a 
+                        Performers Applied : </p>
+
+		    {% for p_l in listing.performers_liked.all|slice:":3" %}
+			<li class="w3-opacity">{{ p_l.first_name }}</li>
+  		    {% endfor %}
+		    </br>
+                            <a 
+				    class="btn btn-info" 
+				    href="listing_my/{{ listing.listing_id }}">
+    					Finalize
+				</a>
+			{% else %}
+			<p >
+                        Performer Finalized : </p>
+
+			<li class="w3-opacity">{{ listing.final_performer }}</li>
+		    </br>
+                            <a 
 				    class="btn btn-info" 
 				    href="/performer/profile/{{listing.final_performer.username}}">
-				    View Performer
+    					Profile
 				</a>
-			<br> <br>
-		  <a 
-				    class="btn btn-info" 
-				    href="/performer/explore/{{listing.listing_venue.username }}">
-				    Explore Venue
-				</a>
+			{% endif %}
                         </div>
                     </div>
                 </div>
@@ -121,38 +123,43 @@ body {font-family: "Lato", sans-serif}
 </div>
 {% endblock %}
 
-
-
-
   </div>
-
+</div>
 <!--
-I am driving up 85 in the
-Kind of morning that lasts all afternoon
-I'm just stuck inside the gloom
-4 more exits to my apartment but
-I am tempted to keep the car in drive
-And leave it all behind
-'Cause I wonder sometimes
-About the outcome
-Of a still verdictless life
-Am I living it right?
-Am I living it right?
-Am I living it right?
-Why, why Georgia, why?
-I rent a room and I fill the spaces with
-Wood in places to make it feel like home
-But all I feel's alone
-It might be a quarter life crisis
-Or just the stirring in my soul
-Either way I wonder sometimes
-About the outcome
-Of a still verdictless life
-Am I living it right?
-Am I living it right?
-Am I living it right?
-Why, why Georgia, why?
+
+Down down, you bring me down
+I hear you knocking at my door and I can't sleep at night
+Your face, it has no place
+No room for you inside my house I need to be alone
+
+Don't waste your words I don't need anything from you
+I don't care where you've been or what you plan to do
+
+Turn turn, I wish you'd learn
+There's a time and place for everything I've got to get it through
+Cut loose, you're no use
+I couldn't stand another second in your company
+
+Don't waste your words I don't need anything from you
+I don't care where you've been or what you plan to do
+
+Stone me, why can't you see
+You're a no-one nowhere washed up baby who'd look better dead
+
+Your tongue is far too long
+I don't like the way it sucks and slurps upon my every word
+
+Don't waste your words I don't need anything from you
+I don't care where you've been or what you plan to do
+
+I am the resurrection and I am the light
+I couldn't ever bring myself to hate you as I'd like
+
+I am the resurrection and I am the light
+I couldn't ever bring myself to hate you as I'd like
+
 -->
+
 
 </body>
 </html>

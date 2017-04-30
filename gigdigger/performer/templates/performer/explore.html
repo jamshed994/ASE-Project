@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<title>Gigdigger</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="/performer/templates/listing/style_list.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+<body>
+
+<!-- Navbar -->
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card-2">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="/#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    {% if user.is_authenticated %}
+    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY PROFILE</a>
+    {% else %}
+    <a href="/performer/login/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG IN</a>
+    
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">SIGNUP <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="/performer/venue_signup/" class="w3-bar-item w3-button">VENUE SIGNUP</a>
+         <a href="/performer/performer_signup/" class="w3-bar-item w3-button">PERFORMER SIGNUP</a>
+      </div>
+    </div>
+    {% endif %}
+
+    <a href="/performer/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
+    
+<a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+    {% if user.is_authenticated %}
+    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right	">{{ user.first_name|upper }}</a>
+    {% endif %}
+  </div>
+</div>
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+<div class="mainbody container-fluid" style="float:center">
+    <div class="row">
+
+        <div style="padding-top:50px;"> </div>
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div align="center">
+                            <img class="thumbnail img-responsive" src="{{ performer.photo }}" width="300px" height="300px">
+                        </div>
+                        <div class="media-body">
+                            <hr>
+                            <h3><strong>Address</strong></h3>
+                            <p>{{ performer.address }}</p>
+                            <hr>
+                            <h3><strong>Location</strong></h3>
+                            <p>{{ performer.location }}</p>
+                            <hr>
+                            <h3><strong>Description</strong></h3>
+                            <p>{{ performer.description }}</p>
+                            <hr>
+                            <h3><strong>Capacity</strong></h3>
+                            <p>{{ performer.capacity }}</p>
+                            <hr>
+                            <h3><strong>Email</strong></h3>
+                            <p>{{ performer.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span>
+                        <h1 class="panel-title pull-left" style="font-size:30px;">{{ performer.venue_name}} </h1>
+                        
+                    </span>
+                    <br><br>
+                   {{ performer.status }}
+                    <br><br><hr>
+                </div>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                    <h3>Getting Here</h3>
+                    <div id="map"></div>
+                    <script>
+                      function initMap() {
+                        var latitude = 40.7128;
+                        var longitude = -74.0059;
+                        var uluru = {lat: latitude, lng: longitude};
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                          zoom: 10,
+                          center: uluru
+                        });
+                        var marker = new google.maps.Marker({
+                          position: uluru,
+                          map: map
+                        });
+                      }
+                    </script>
+                    <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7xk58gwzSafN_KR7ySF5dRtVKafcMapk&callback=initMap">
+                    </script>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!--
+
+Let me in, the voice cried softly,
+from outside the wooden door.
+Scattered remnants of the ship could be seen in the distance,
+Blood stained the icy wall of the shore.
+
+I'm the only one left. The storm, took them all,
+He managed as he tried to stand.
+The tears ran down his face.
+Please, it's cold.
+
+When he woke, there was no trace of the ship.
+Only the dawn was left behind by the storm.
+He felt the creaking of the stairs beneath him.
+That rose, from the sea, to the door.
+
+There was a sound at the window then.
+The captain started, his breath was still.
+Slowly, he turned.
+
+From behind the edge of the windowsill,
+There appeared the delicate hand of a child.
+His face was flush and timid.
+He stared at the captain through frightened eyes.
+
+The captain reached for something to hold on to,
+Help me, he whispered, as he rose slowly to his feet.
+The boy's face went pale,
+He recognized the sound.
+
+Silently, he pulled down the shade against the shadow.
+Lost in the doorstep of the empty house.
+
+I'm trying to find my way home.
+
+I'm sorry
+And I miss you.
+
+I miss you.
+I've grown taller now.
+I want the police to be notified.
+I'll make it up to you,
+I swear, I'll make it up to you.
+
+I miss you.
+
+-->
+ 
+</body>
+</html>

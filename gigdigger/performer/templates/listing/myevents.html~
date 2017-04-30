@@ -27,27 +27,19 @@ body {font-family: "Lato", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card-2">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="/#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-    {% if request.user.is_authenticated or user.is_authenticated%}
-    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY PROFILE</a>
-    {% else %}
-    <a href="/performer/login/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG IN</a>
-    
-    <div class="w3-dropdown-hover w3-hide-small">
-      <button class="w3-padding-large w3-button" title="More">SIGNUP <i class="fa fa-caret-down"></i></button>     
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="/performer/venue_signup/" class="w3-bar-item w3-button">VENUE SIGNUP</a>
-         <a href="/performer/performer_signup/" class="w3-bar-item w3-button">PERFORMER SIGNUP</a>
-      </div>
-    </div>
-    {% endif %}
 
-    <a href="/performer/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
-    
-<a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
-    {% if request.user.is_authenticated or user.is_authenticated%}
+
+    <a href="{% url 'venue_update' %}" class="w3-bar-item w3-button w3-padding-large">UPDATE PROFILE</a>
+<a href="{% url 'listing_new' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CREATE LISTING</a>
+<a href="{% url 'my_listing' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY LISTINGS</a>
+<a href="{% url 'event_my' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY EVENTS</a>
+    <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
+    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+
+    {% if request.user.is_authenticated or user.is_authenticated %}
     <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right	">{{ user.first_name|upper }}</a>
     {% endif %}
+
   </div>
 </div>
 
@@ -106,12 +98,15 @@ body {font-family: "Lato", sans-serif}
 				    href="/performer/profile/{{listing.final_performer.username}}">
 				    View Performer
 				</a>
+
 			<br> <br>
-		  <a 
+			    {% if request.user.is_authenticated or user.is_authenticated%}
+		   <a 
 				    class="btn btn-info" 
-				    href="/performer/explore/{{listing.listing_venue.username }}">
-				    Explore Venue
+				    href="/listing/remove/{{listing.listing_id}}">
+				    Delete Event
 				</a>
+			{% endif %}
                         </div>
                     </div>
                 </div>
@@ -127,31 +122,48 @@ body {font-family: "Lato", sans-serif}
   </div>
 
 <!--
-I am driving up 85 in the
-Kind of morning that lasts all afternoon
-I'm just stuck inside the gloom
-4 more exits to my apartment but
-I am tempted to keep the car in drive
-And leave it all behind
-'Cause I wonder sometimes
-About the outcome
-Of a still verdictless life
-Am I living it right?
-Am I living it right?
-Am I living it right?
-Why, why Georgia, why?
-I rent a room and I fill the spaces with
-Wood in places to make it feel like home
-But all I feel's alone
-It might be a quarter life crisis
-Or just the stirring in my soul
-Either way I wonder sometimes
-About the outcome
-Of a still verdictless life
-Am I living it right?
-Am I living it right?
-Am I living it right?
-Why, why Georgia, why?
+
+Babe, baby, baby, I'm Gonna Leave You.
+I said baby, you know I'm gonna leave you.
+I'll leave you in the summertime,
+Leave you when the summer comes a-rollin'
+Leave you when the summer comes along.
+
+Babe, babe, babe, babe, babe, babe,
+Baby, baby, I wanna leave you.
+I ain't jokin' woman, I got to ramble.
+Oh, yeah, baby, baby, I believin',
+We really got to ramble.
+I can hear it callin' me the way it used to do,
+I can hear it callin' me back home!
+
+Babe, oh, babe... I'm gonna leave you
+Oh, baby, you know, I've really got to leave you
+Oh, I can hear it callin 'me
+I said don't you hear it callin' me the way it used to do? Ooooh
+
+I know, I know, I know I never, never, never, never, never gonna leave you, babe
+But I got to go away from this place,
+I've got to quit you, yeah
+Ooh, baby, baby, baby, baby, baby, baby, baby, ooh, don't you hear it callin' me?
+Oh, woman, woman, I know, I know
+It feels good to have you back again
+And I know that one day, baby, it's gonna really grow, yes it is.
+We gonna go walkin' through the park every day.
+Come what may, every day, ooh
+
+My my my my my, my babe.
+I'm gonna leave you, go away...
+... Oh I miss you, baby
+
+It was really, really good.
+You made me happy every single day.
+But now... I've got to go away! Oh, oh, oh.
+
+Baby, baby, baby
+That's when it's callin' me
+I said that's when it's callin' me back home... 
+
 -->
 
 </body>

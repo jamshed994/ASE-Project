@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +28,6 @@ body {font-family: "Lato", sans-serif}
     <a href="{% url 'venue_update' %}" class="w3-bar-item w3-button w3-padding-large">UPDATE PROFILE</a>
 <a href="{% url 'listing_new' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CREATE LISTING</a>
 <a href="{% url 'my_listing' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY LISTINGS</a>
-<a href="{% url 'event_my' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY EVENTS</a>
     <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
     <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
 
@@ -40,6 +37,7 @@ body {font-family: "Lato", sans-serif}
 
   </div>
 </div>
+
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:50px">
@@ -70,51 +68,30 @@ body {font-family: "Lato", sans-serif}
 {% block body %}
 <div class="row">
 
-      {% for listing in listings %}
+      {% for p_l in liked_performers.all %}
         <div class="col-sm-4">
-            <div class="thumbnail" style="height:600px">
-                <img class="group list-group-image" src="{{ listing.listing_venue.photo }}" alt="" />
+            <div class="thumbnail" style="height:400px">
+                <img class="group list-group-image" style="max-height:160px" src="{{ p_l.photo }}" alt="" />
                 <div class="w3-opacity;    word-wrap: break-word;   width: 100px;">
                     <h4 >
-                        Subject: {{ listing.subject }}</h4>
-                    <p >
-                        Message: {{ listing.message|truncatechars:25 }}</p>
+                        Name: {{ p_l.first_name }} {{ p_l.last_name }}</h4>
+			<a 
+				    class="btn btn-info" 
+				    href="/performer/profile/{{p_l.username}}">
+				    View Profile
+				</a>
 		    <p >
-                        Contact: {{ listing.contact }}</p>
-		    <p >
-                        Venue-id: {{ listing.listing_venue.username }}</p>
-		    <p >
-                        date-time: {{ listing.ldatetime }}</p>
+                        location: {{ p_l.location }}</p>
                     <div>
-                                <p>Listing-Id: {{ listing.listing_id }}</p>
+                                <p >
+                        Contact: {{ p_l.email }}</p>
                     <div >
 			<hr>
-			{% if not listing.final_performer %}
-			
-		    <p >
-                        Performers Applied : </p>
-
-		    {% for p_l in listing.performers_liked.all|slice:":3" %}
-			<li class="w3-opacity">{{ p_l.first_name }}</li>
-  		    {% endfor %}
-		    </br>
                             <a 
 				    class="btn btn-info" 
-				    href="listing_my/{{ listing.listing_id }}">
-    					Finalize
+				    href="{{ p_l.username }}/">
+				    Finalize
 				</a>
-			{% else %}
-			<p >
-                        Performer Finalized : </p>
-
-			<li class="w3-opacity">{{ listing.final_performer }}</li>
-		    </br>
-                            <a 
-				    class="btn btn-info" 
-				    href="/performer/profile/{{listing.final_performer.username}}">
-    					Profile
-				</a>
-			{% endif %}
                         </div>
                     </div>
                 </div>
@@ -126,41 +103,61 @@ body {font-family: "Lato", sans-serif}
 
   </div>
 </div>
+
 <!--
 
-Down down, you bring me down
-I hear you knocking at my door and I can't sleep at night
-Your face, it has no place
-No room for you inside my house I need to be alone
+Well sometimes I go out by myself
+And I look across the water
+And I think of all the things, what you're doing
+And in my head I paint a picture
 
-Don't waste your words I don't need anything from you
-I don't care where you've been or what you plan to do
+Since I've come on home,
+Well my body's been a mess
+And I've missed your ginger hair
+And the way you like to dress
+Won't you come on over
+Stop making a fool out of me
+Why don't you come on over, Valerie?
 
-Turn turn, I wish you'd learn
-There's a time and place for everything I've got to get it through
-Cut loose, you're no use
-I couldn't stand another second in your company
+Valerie [3x]
 
-Don't waste your words I don't need anything from you
-I don't care where you've been or what you plan to do
+Did you have to go to jail,
+Put your house on up for sale, did you get a good lawyer?
+I hope you didn't catch a tan,
+I hope you find the right man who'll fix it for ya
+Are you shopping anywhere,
+Changed the color of your hair, are you busy?
+And did you have to pay that fine
+That you were dodging all the time, are you still dizzy?
 
-Stone me, why can't you see
-You're a no-one nowhere washed up baby who'd look better dead
+Since I've come on home,
+Well my body's been a mess
+And I've missed your ginger hair
+And the way you like to dress
+Won't you come on over?
+Stop making a fool out of me
+Why don't you come on over, Valerie?
 
-Your tongue is far too long
-I don't like the way it sucks and slurps upon my every word
+Valerie [3x]
 
-Don't waste your words I don't need anything from you
-I don't care where you've been or what you plan to do
+Well sometimes I go out by myself
+And I look across the water
+And I think of all the things, what you're doing
+And in my head I paint a picture
 
-I am the resurrection and I am the light
-I couldn't ever bring myself to hate you as I'd like
+Since I've come on home,
+Well my body's been a mess
+And I've missed your ginger hair
+And the way you like to dress
+Won't you come on over?
+Stop making a fool out of me
+Why don't you come on over, Valerie?
 
-I am the resurrection and I am the light
-I couldn't ever bring myself to hate you as I'd like
+Valerie [7x]
+
+Why don't you come on over, Valerie? 
 
 -->
-
 
 </body>
 </html>

@@ -22,7 +22,8 @@ body {font-family: "Lato", sans-serif}
     <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY PROFILE</a>
     {% else %}
     <a href="/performer/login/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG IN</a>
-    
+    {% endif %}
+    <a href="/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
     <div class="w3-dropdown-hover w3-hide-small">
       <button class="w3-padding-large w3-button" title="More">SIGNUP <i class="fa fa-caret-down"></i></button>     
       <div class="w3-dropdown-content w3-bar-block w3-card-4">
@@ -30,14 +31,7 @@ body {font-family: "Lato", sans-serif}
          <a href="/performer/performer_signup/" class="w3-bar-item w3-button">PERFORMER SIGNUP</a>
       </div>
     </div>
-    {% endif %}
-
-    <a href="performer/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
-    
 <a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
-    {% if request.user.is_authenticated %}
-    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right	">{{ user.first_name|upper }}</a>
-    {% endif %}
   </div>
 </div>
 
@@ -65,7 +59,7 @@ body {font-family: "Lato", sans-serif}
 
 {% block body %}
 <div style="border: 1px solid #c0c0c0; margin: 0 2px; padding: .35em .625em .75em;">
-<h2 class="w3-opacity" >Welcome Venue!</h2>
+<h2 class="w3-opacity" >Welcome Performer!</h2>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

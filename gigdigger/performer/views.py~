@@ -57,7 +57,7 @@ def ViewEventsAll(request):
 
 def ViewMyEvents(request):
     listings = Listing.objects.exclude(final_performer__isnull=True).filter(listing_venue = request.user)
-    return render_to_response('listing/myevents.html', {'listings': listings, 'user': request.user})
+    return render_to_response('listing/myevents.html', {'listings': listings, 'user': request.user, 'request.user': request.user})
     
 def ViewMyListing(request):
     listings = Listing.objects.filter(listing_venue=request.user)
@@ -77,11 +77,11 @@ def FinalMyListing(request, listing_id):
 
 def ProfilePage(request, username):
     p = User.objects.get(username=username)
-    return render_to_response('performer/profile.html', {'performer': p, 'user': request.user})
+    return render_to_response('performer/profile.html', {'performer': p, 'user': request.user, 'request.user': request.user})
 
 def ExplorePage(request, username):
     p = User.objects.get(username=username)
-    return render_to_response('performer/explore.html', {'performer': p, 'user': request.user})
+    return render_to_response('performer/explore.html', {'performer': p, 'user': request.user, 'request.user': request.user})
 
 def CreateNewListing(request):
     model = Listing

@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 
 from performer.views import DetailUser, UpdatePerformer, UpdateVenue, CreateUser, LogoutUser
-from performer.views import ViewListingAll, LikeListing, ViewListingAll, CreateNewListing, RemoveListing
+from performer.views import ViewListingAll, LikeListing, ViewListingAll, CreateNewListing
 from performer.views import RecordMyListing, ViewMyListing, FinalMyListing, ProfilePage, ExplorePage, ViewEventsAll, ViewMyEvents
 
 
@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'^profile/(?P<username>\w+)/$', ProfilePage, name="performer_profile"),
     url(r'^explore/(?P<username>\w+)/$', ExplorePage, name="venue_profile"),
     #url(r'^listing/select$', ViewListingSelect , name='listing_select'),
-    url(r'^listing/remove/(?P<listing_id>\w+)/$', RemoveListing, name="listing_remove"),
     url(r'^listing/listing_like/(?P<listing_id>\w+)/$', LikeListing, name="listing_like"),
     url(r'^listing/listing_like/(?P<listing_id>\w+)/success$', RedirectView.as_view(url='/detail')),
     url(r'^listing/listing_my/(?P<listing_id>\w+)/$', FinalMyListing, name="listing_final"),
