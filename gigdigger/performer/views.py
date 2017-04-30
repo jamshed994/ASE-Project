@@ -10,6 +10,13 @@ from performer.models import Listing, User
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
+
+from twilio.rest import TwilioRestClient
+account_sid = "AC3aa6d08320541bf24272374e0dc6f353"
+auth_token = "0d5df531df287180ba69fe77e2c2d2e7"
+client = TwilioRestClient(account_sid, auth_token)
+
+
 User = get_user_model()
 
 
@@ -114,6 +121,10 @@ def RecordMyListing(request, listing_id, username):
     p = User.objects.get(username=username)
     l.final_performer = p
     l.save()
+
+    message = client.messages.create(to="+15103644011", from_="+16502850704",body="Hi " + username + "! Your  application for listing insert status has been updated on Gig Digger!")
+
+
     messages.success(request, 'You have Finalized Performer for the listing ' + listing_id + ' and the performer ' + username)
     return redirect('/performer/detail')    
 
