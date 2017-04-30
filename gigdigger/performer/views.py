@@ -67,7 +67,7 @@ def ViewMyEvents(request):
     return render_to_response('listing/myevents.html', {'listings': listings, 'user': request.user})
     
 def ViewMyListing(request):
-    listings = Listing.objects.filter(listing_venue=request.user)
+    listings = Listing.objects.filter(listing_venue=request.user).filter(final_performer__isnull = True)
     #listings = Listing.objects.all()
     return render_to_response('listing/listmy.html', {'listings': listings})
 
@@ -122,7 +122,7 @@ def RecordMyListing(request, listing_id, username):
     l.final_performer = p
     l.save()
 
-    message = client.messages.create(to="+15103644011", from_="+16502850704",body="Hi " + username + "! Your  application for listing insert status has been updated on Gig Digger!")
+    message = client.messages.create(to=p.phone_number, from_="+16502850704",body="Hi " + p.full_name + "! Your  application status has been updated on Gig Digger!")
 
 
     messages.success(request, 'You have Finalized Performer for the listing ' + listing_id + ' and the performer ' + username)
