@@ -38,7 +38,7 @@ class UserCreationForm(forms.ModelForm):
 class PerformerUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'photo', 'youtube1','y1d', 'youtube2', 'y2d', 'youtube3', 'y3d', 'soundcloud1','s1d','soundcloud2','s2d','soundcloud3','s3d','location', 'birthday', 'bio', 'gender', 'status')
+        fields = ('username', 'email', 'first_name', 'last_name', 'photo', 'youtube1','y1d', 'youtube2', 'y2d', 'youtube3', 'y3d', 'soundcloud1','s1d','soundcloud2','s2d','soundcloud3','s3d','location', 'birthday', 'bio', 'gender', 'status','phone_number')
 
 
 

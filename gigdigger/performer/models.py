@@ -59,6 +59,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     description = models.CharField(_('description string'), max_length=30, blank=True)
     address = models.CharField(_('address string'), max_length=100, blank=True)
     venue_name = models.CharField(_('venue name string'), max_length=30, blank=True)
+    phone_number = models.CharField(_('phone number'), max_length=30, blank=True)
+
 
 
 
@@ -145,5 +147,6 @@ class Listing(models.Model):
     listing_venue = models.ForeignKey(User, related_name="listing_venue")
     performers_liked = models.ManyToManyField(User,  related_name="performers_liked")
     final_performer = models.ForeignKey(User, models.SET_NULL, blank=True, null=True, related_name="final_performer")
+    tic_counter = models.CharField(max_length=500,null=True)
     class Meta:
         verbose_name = 'Listing'

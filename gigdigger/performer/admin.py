@@ -7,7 +7,7 @@ from performer.forms import ListingCreateForm
 
 
 class UserAdmin(BaseUserAdmin):
-    list_display = ('username', 'full_name', 'date_joined', 'last_login', 'is_active')
+    list_display = ('username', 'full_name', 'date_joined', 'last_login', 'is_active','phone_number')
     list_filter = ('is_active', 'is_staff', 'is_superuser')
     search_fields = ('username', 'email')
     date_hierarchy = 'date_joined'
@@ -31,7 +31,7 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(User, UserAdmin)
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('subject', 'listing_id', 'listing_venue')
+    list_display = ('subject', 'listing_id', 'listing_venue','tic_counter')
     fields = ('subject', 'message', 'contact', 'ldatetime', 'listing_venue', 'listing_id', 'performers_liked', 'final_performer')
     form = ListingCreateForm
  
