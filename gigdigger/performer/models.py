@@ -60,6 +60,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     address = models.CharField(_('address string'), max_length=100, blank=True)
     venue_name = models.CharField(_('venue name string'), max_length=30, blank=True)
     phone_number = models.CharField(_('phone number'), max_length=30, blank=True)
+    
+    map_location = models.CharField(_('map location'), max_length=30, blank=True)
+    twitter_id = models.CharField(_('twitter id'), max_length=30, blank=True)
+    yelp_id = models.CharField(_('yelp id'), max_length=30, blank=True)
 
 
 

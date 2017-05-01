@@ -7,7 +7,7 @@ from performer.forms import ListingCreateForm
 
 
 class UserAdmin(BaseUserAdmin):
-    list_display = ('username', 'full_name', 'date_joined', 'last_login', 'is_active','phone_number')
+    list_display = ('username', 'full_name', 'date_joined', 'last_login', 'is_active','phone_number','twitter_id','map_location','yelp_id')
     list_filter = ('is_active', 'is_staff', 'is_superuser')
     search_fields = ('username', 'email')
     date_hierarchy = 'date_joined'
