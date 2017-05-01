@@ -43,7 +43,7 @@ body {font-family: "Lato", sans-serif}
 <a href="{% url 'my_listing' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY LISTINGS</a>
 <a href="{% url 'event_my' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY EVENTS</a>
     <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
-    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="20" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
     
 
     {% endif %}
@@ -308,6 +308,7 @@ body {font-family: "Lato", sans-serif}
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+<script>(function() { var s = document.createElement("script");s.async = true;s.onload = s.onreadystatechange = function(){getYelpWidget("boo-boo-records-inc-san-luis-obispo","350","RED","y","y","3");};s.src='http://chrisawren.com/widgets/yelp/yelpv2.js' ;var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();</script>
 <div class="mainbody container-fluid" style="float:center">
     <div class="row">
        
@@ -361,7 +362,10 @@ body {font-family: "Lato", sans-serif}
             <hr>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="pull-left">
+                <h3 align="center">Check us out on Yelp!</h3>
+                    <div align="center"><p><div style="border:1px solid black" id='yelpwidget'></div></p></div>
+                    <div>
+
                     <h3>Getting Here</h3>
                     <div id="map"></div>
                     <script>

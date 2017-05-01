@@ -33,7 +33,9 @@ body {font-family: "Lato", sans-serif}
 
     <a href="/performer/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
     
-<a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+<a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="22" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+
+
     {% if request.user.is_authenticated or user.is_authenticated  %}
     <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right	">{{ user.first_name|upper }}</a>
     {% endif %}
@@ -45,7 +47,7 @@ body {font-family: "Lato", sans-serif}
 
   <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" id="band">
     <h2 class="w3-wide">GigDigger</h2>
-    <p class="w3-opacity"><i>We connect Venues with talented aspiring Performers</i></p>
+    <p class="w3-opacity"><i>Connecting Venues with talented aspiring Performers</i></p>
     <!-- <div class="w3-row w3-padding-32">
       <div class="w3-third">
         <p>Name</p>
@@ -75,8 +77,7 @@ body {font-family: "Lato", sans-serif}
   <div class="mySlides w3-display-container w3-center">
     <img src="http://www.trbimg.com/img-56abae1c/turbine/bal-paramount-new-york-music-venue-announces-plans-for-location-near-baltimore-stadiums" style="width:60%;float:center;height:450px">
     <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-      <h3>New York</h3>
-      <p><b>The atmosphere in New York is lorem ipsum.</b></p>    
+      <h3>New York</h3>  
     </div>
   </div>
   <div class="mySlides w3-display-container w3-center">
@@ -98,7 +99,6 @@ body {font-family: "Lato", sans-serif}
   <i class="fa fa-pinterest-p w3-hover-opacity"></i>
   <i class="fa fa-twitter w3-hover-opacity"></i>
   <i class="fa fa-linkedin w3-hover-opacity"></i>
-  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
 
 <script>
@@ -137,42 +137,6 @@ window.onclick = function(event) {
 }
 </script>
 
-
-<!-- 
-If you build it, they will come
-Can you remember where that line came from
-It was a movie,
-As I recall it had a baseball theme
-
-Was it Bull Durham, oh not that old
-You know I think that it had James Earl Jones
-And Kevin Costner, though it wasn't For The Love of The Game
-
-My brother always says it and he gets this crazy look in his eye
-But I don't want to get involved; brother I'm just tryin' to get by
-But oh he's so convincing, what could I be missing this time
-His mind is overheating and he just keeps repeating his line
-
-If you build it, they will come
-Think I remember where that line came from.
-It was a movie, one that keeps you guessing til the end
-Guy has a vision, an awesome one
-It happened when the workaday was done
-Lit up like heaven
-Baseball diamond on his farm
-
-My brother throws a party every Wednesday at the local town bar
-And if you got a song to sing then should probably bring your guitar
-Cause when everyone is gathered, no where else that they'd rather be
-That's when he winks at me and smiles like he did the night we saw that movie
-
-Yeah if you build it, they will come
-Yes I remember where that line came from
-It was a movie, one that everyone out there has seen
-And when the voices, call out to you
-Maybe it's something that you could pursue
-Cause we're all living, yes we are living in this field.
--->
 
 </body>
 </html>
