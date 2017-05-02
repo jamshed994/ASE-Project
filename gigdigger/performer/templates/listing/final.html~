@@ -25,7 +25,7 @@ body {font-family: "Lato", sans-serif}
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
 
 
-    <a href="{% url 'venue_update' %}" class="w3-bar-item w3-button w3-padding-large">UPDATE PROFILE</a>
+<a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large">MY PROFILE</a>
 <a href="{% url 'listing_new' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CREATE LISTING</a>
 <a href="{% url 'my_listing' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY LISTINGS</a>
 <a href="{% url 'event_my' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY EVENTS</a>

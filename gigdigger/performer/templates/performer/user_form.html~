@@ -37,7 +37,7 @@ body {font-family: "Lato", sans-serif}
 <a href="{% url 'my_listing' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY LISTINGS</a>
 <a href="{% url 'event_my' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY EVENTS</a>
     <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
-    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="20" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+    <a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="20" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
     
 
     {% endif %}
@@ -87,7 +87,7 @@ body {font-family: "Lato", sans-serif}
 
 
         {% if object %}
-            <input type="submit" value="{% trans 'Update' %}"/>
+            <input style="width: 115px;height: 25px;background: #4E9CAF;padding: 5px;text-align: center;border-radius: 5px;color: white;font-weight: bold; text-decoration: none;" type="submit" value="{% trans 'Update' %}"/>
         {% else %}
             <input type="submit" value="{% trans 'Sign up' %}"/>
         {% endif %}
