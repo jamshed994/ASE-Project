@@ -7,11 +7,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
 body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
 </style>
 <body>
-
+<style>
+.center-cropped {
+  width: 100px;
+  height: 100px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+</style>
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card-2">
@@ -31,9 +39,9 @@ body {font-family: "Lato", sans-serif}
     </div>
     {% endif %}
 
-    <a href="performer/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
-    
-<a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+    <a href="/performer/events/all" class="w3-bar-item w3-button w3-padding-large w3-hide-small">EVENTS</a>
+<a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="20" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+
     {% if request.user.is_authenticated or user.is_authenticated  %}
     <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right	">{{ user.first_name|upper }}</a>
     {% endif %}
@@ -41,64 +49,78 @@ body {font-family: "Lato", sans-serif}
 </div>
 
 <!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:50px">
+<div style="background:url('https://media.timeout.com/images/101707745/image.jpg'); background-repeat: no-repeat; background-size: 100%; height:1800px;background-repeat-y:initial" >
+
+</div>
+
+<div class="w3-content" style="max-width:70vw;margin-top:-1700px; height:1500px; background: rgba(256,256,256,0.9); border-radius: 25px;">
 
   <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" id="band">
-    <h2 class="w3-wide">GigDigger</h2>
-    <p class="w3-opacity"><i>We connect Venues with talented aspiring Performers</i></p>
-    <!-- <div class="w3-row w3-padding-32">
-      <div class="w3-third">
-        <p>Name</p>
-        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
-      </div>
-      <div class="w3-third">
-        <p>Name</p>
-        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
-      </div>
-      <div class="w3-third">
-        <p>Name</p>
-        <img src="/w3images/bandmember.jpg" class="w3-round" alt="Random Name" style="width:60%">
-      </div>
-    </div> -->
-  </div>
+<img style="margin-top:-25px" src = "http://i68.tinypic.com/2rhw6fp.jpg" />
+    <p style="margin-top:-15px" class="w3-opacity"><i>Connecting Venues with Talented Aspiring Performers</i></p>
+    <div style="margin-top:35px"><div style="width:40%;float:left">
+    <p style="font-weight:bold"> For Organizers and Venues:  </p>
+    <p> Here at GigDigger we endeavour to connect you with over 1000 local Performers and help find the one that's best for your upcoming gig. </p><br><a href="/performer/venue_signup/" style="width: 115px;height: 25px;background: #4E9CAF;padding: 10px;text-align: center;border-radius: 5px;color: white;font-weight: bold; text-decoration: none;"> Register Here </a></div>
+    <div style="width:40%;float:right">
+    <p style="font-weight:bold"> For Performers:  </p>
+    <p> Unlock your potential and grow your fan base, access and apply for listings from Venues and Reimagine Success. </p><br><a href="/performer/performer_signup/" style="width: 115px;height: 25px;background: #4E9CAF;padding: 10px;text-align: center;border-radius: 5px;color: white;font-weight: bold; text-decoration: none;">Register Here </a></div>
+    </div>
+	
+    </div>
+    <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px; margin-top:10px" id="Featured">
+    <div><div style="width:40%;float:left">
+    <p style="font-weight:bold"> Week's Top Pick:  </p>
+    <img style="width:100%;height:175px" src="https://i.ytimg.com/vi/DjV-O7DnQ4Y/maxresdefault.jpg" alt="" />
+    <p> Maud Adams is an incredibly talented Jazz guitarist from Ohio who is currently touring the East Coast with his band .  </p><a href="/performer/profile/MaudAdams/" style="width: 115px;height: 25px;background: #4E9CAF;padding: 10px;text-align: center;border-radius: 5px;color: white;font-weight: bold; text-decoration: none;">Profile </a></div>
+    <div style="width:40%;float:right">
+    <p style="font-weight:bold"> Featured Venue:  </p>
+    <img style="width:100%;height:175px" src="http://www.herecomestheguide.com/images/venues_large/404-NYC2.jpg" alt="" />
+    <p> Find Your Groove at 404NYC this week, with a new Theme and DJ everyday. from 5-12 May </p><a href="http://127.0.0.1:8000/performer/explore/404NYC/" style="width: 115px;height: 25px;background: #4E9CAF;padding: 10px;text-align: center;border-radius: 5px;color: white;font-weight: bold; text-decoration: none;">Explore </a></div>
+    </div>
 
-
-
+    </div>
+<div class="w3-container w3-content w3-center w3-padding-32">
   <!-- Automatic Slideshow Images -->
-  <div class="mySlides w3-display-container w3-center">
-    <img src="https://media.timeout.com/images/100286017/image.jpg" style="width:60%;float:center;height:450px">
+  <p style="text-align:center; font-weight:bold"> Our Past Events and Success Stories</p>
+  <div class="mySlides w3-display-container w3-center" style="margin-top:50px">
+    <img src="https://media.timeout.com/images/101707745/image.jpg" style="width:80%;float:center;height:450px">
     <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
       <h3>Los Angeles</h3>
       <p><b>Musicians had the best time playing at Venice Beach!</b></p>   
     </div>
   </div>
-  <div class="mySlides w3-display-container w3-center">
-    <img src="http://www.trbimg.com/img-56abae1c/turbine/bal-paramount-new-york-music-venue-announces-plans-for-location-near-baltimore-stadiums" style="width:60%;float:center;height:450px">
+  <div class="mySlides w3-display-container w3-center" style="margin-top:50px">
+    <img src="http://www.trbimg.com/img-56abae1c/turbine/bal-paramount-new-york-music-venue-announces-plans-for-location-near-baltimore-stadiums" style="width:80%;float:center;height:450px">
     <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-      <h3>New York</h3>
-      <p><b>The atmosphere in New York is lorem ipsum.</b></p>    
+      <h3>New York</h3>  
+	<p><b>The New Landers rocking at 404NYC!</b></p>   
     </div>
   </div>
-  <div class="mySlides w3-display-container w3-center">
-    <img src="http://pixel.nymag.com/imgs/daily/grub/2016/best-of-new-york/best-concert-venue-music-hall-of-williamsburg.w710.h473.2x.jpg" style="width:60%;float:center;height:450px">
+  <div class="mySlides w3-display-container w3-center" style="margin-top:50px">
+    <img src="http://pixel.nymag.com/imgs/daily/grub/2016/best-of-new-york/best-concert-venue-music-hall-of-williamsburg.w710.h473.2x.jpg" style="width:80%;float:center;height:450px">
     <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
       <h3>Chicago</h3>
       <p><b>Thank you, Chicago - A night we won't forget.</b></p>    
     </div>
   </div>
 
-<div class="w3-content" style="max-width:2000px;margin-top:46px">
+</div>
+
+
+  </div>
+
+
+
 
   
 <!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge" style = "margin-top:50px">
   <i class="fa fa-facebook-official w3-hover-opacity"></i>
   <i class="fa fa-instagram w3-hover-opacity"></i>
   <i class="fa fa-snapchat w3-hover-opacity"></i>
   <i class="fa fa-pinterest-p w3-hover-opacity"></i>
   <i class="fa fa-twitter w3-hover-opacity"></i>
   <i class="fa fa-linkedin w3-hover-opacity"></i>
-  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
 
 <script>
@@ -137,42 +159,6 @@ window.onclick = function(event) {
 }
 </script>
 
-
-<!-- 
-If you build it, they will come
-Can you remember where that line came from
-It was a movie,
-As I recall it had a baseball theme
-
-Was it Bull Durham, oh not that old
-You know I think that it had James Earl Jones
-And Kevin Costner, though it wasn't For The Love of The Game
-
-My brother always says it and he gets this crazy look in his eye
-But I don't want to get involved; brother I'm just tryin' to get by
-But oh he's so convincing, what could I be missing this time
-His mind is overheating and he just keeps repeating his line
-
-If you build it, they will come
-Think I remember where that line came from.
-It was a movie, one that keeps you guessing til the end
-Guy has a vision, an awesome one
-It happened when the workaday was done
-Lit up like heaven
-Baseball diamond on his farm
-
-My brother throws a party every Wednesday at the local town bar
-And if you got a song to sing then should probably bring your guitar
-Cause when everyone is gathered, no where else that they'd rather be
-That's when he winks at me and smiles like he did the night we saw that movie
-
-Yeah if you build it, they will come
-Yes I remember where that line came from
-It was a movie, one that everyone out there has seen
-And when the voices, call out to you
-Maybe it's something that you could pursue
-Cause we're all living, yes we are living in this field.
--->
 
 </body>
 </html>

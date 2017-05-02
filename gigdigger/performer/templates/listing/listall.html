@@ -28,11 +28,11 @@ body {font-family: "Lato", sans-serif}
   <div class="w3-bar w3-black w3-card-2">
     <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
 
-    <a href="{% url 'performer_update' %}" class="w3-bar-item w3-button w3-padding-large">UPDATE PROFILE</a>
+    <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large">MY PROFILE</a>
     <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">VIEW LISTINGS</a>
     <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
     <a href="/#" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="20" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated or user.is_authenticated%}
     <a href="/performer/detail/" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right	">{{ user.first_name|upper }}</a>
     {% endif %}
 
@@ -43,8 +43,8 @@ body {font-family: "Lato", sans-serif}
 <div class="w3-content" style="max-width:2000px;margin-top:50px">
 
   <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:1000px" id="band">
-    <h2 class="w3-wide">GigDigger</h2>
-    <p class="w3-opacity"><i>We connect Venues with talented aspiring Performers</i></p>
+<img style="margin-top:-25px" src = "http://i68.tinypic.com/2rhw6fp.jpg" />
+    <p style="margin-top:-15px" class="w3-opacity"><i>Connecting Venues with Talented Aspiring Performers</i></p>
     <!-- <div class="w3-row w3-padding-32">
       <div class="w3-third">
         <p>Name</p>
@@ -61,9 +61,9 @@ body {font-family: "Lato", sans-serif}
     </div> -->
 
 <div style="border: 1px solid #c0c0c0; margin: 0 2px; padding: .35em .625em .75em;">
-<h2 class="w3-opacity" >Welcome Performer!</h2>
+<h2 class="w3-opacity" >Welcome {{ user.first_name|title }} !</h2>
 </br>
-<p class="w3-opacity" >All Available Listings</p>
+<p class="w3-opacity" style="font-weight:bold">All Available Listings</p>
 </br>
 </br>
 {% block body %}
@@ -74,7 +74,7 @@ body {font-family: "Lato", sans-serif}
             <div class="thumbnail" style="height:600px">
                 <img class="group list-group-image" src="{{ listing.listing_venue.photo }}" alt="" />
                 <div class="w3-opacity;    word-wrap: break-word;   width: 100px;">
-                    <h4 >
+                    <h4 style="margin-top:20px;">
                         Subject: {{ listing.subject }}</h4>
                     <p >
                         Message: {{ listing.message.message|truncatechars:25 }}</p>

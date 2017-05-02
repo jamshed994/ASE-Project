@@ -16,7 +16,7 @@ body {font-family: "Lato", sans-serif}
         width: 400%;
        }
 </style>
-<body>
+
 
 <!-- Navbar -->
 
@@ -41,8 +41,9 @@ body {font-family: "Lato", sans-serif}
     <a href="{% url 'venue_update' %}" class="w3-bar-item w3-button w3-padding-large">UPDATE PROFILE</a>
 <a href="{% url 'listing_new' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CREATE LISTING</a>
 <a href="{% url 'my_listing' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY LISTINGS</a>
+<a href="{% url 'event_my' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MY EVENTS</a>
     <a href="{% url 'performer_logout' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOG OUT</a>
-    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="30" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
+    <a href="{% url 'listing_all' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">GIG DIGGER <img width="30" height="20" src = "https://img.clipartfest.com/806a796bb5563a4653dc2d6982a571ce_shovel-clipart-image-snow-shovel-clipart_652-655.png" /> </a>
     
 
     {% endif %}
@@ -52,6 +53,7 @@ body {font-family: "Lato", sans-serif}
 
   </div>
 </div>
+<body>
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
@@ -130,7 +132,7 @@ body {font-family: "Lato", sans-serif}
                 <div class="panel-body">
                     <div class="pull-left">
                         <a href="#">
-                            <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                            <img class="media-object img-circle" src="{{ user.photo }}" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                         </a>
                     </div>
                     <h4><a href="#" style="text-decoration:none;"><strong>{{ user.y1d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> </i></a></small></small></h4>
@@ -154,7 +156,7 @@ body {font-family: "Lato", sans-serif}
                 <div class="panel-body">
                     <div class="pull-left">
                         <a href="#">
-                            <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                            <img class="media-object img-circle" src="{{ user.photo }}" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                         </a>
                     </div>
                     <h4><a href="#" style="text-decoration:none;"><strong>{{ user.s1d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i></i></a></small></small></h4>
@@ -181,7 +183,7 @@ body {font-family: "Lato", sans-serif}
                 <div class="panel-body">
                     <div class="pull-left">
                         <a href="#">
-                            <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                            <img class="media-object img-circle" src="{{ user.photo }}" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                         </a>
                     </div>
                     <h4><a href="#" style="text-decoration:none;"><strong>{{ user.y12 }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> </i></a></small></small></h4>
@@ -205,7 +207,7 @@ body {font-family: "Lato", sans-serif}
                 <div class="panel-body">
                     <div class="pull-left">
                         <a href="#">
-                            <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                            <img class="media-object img-circle" src="{{ user.photo }}" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                         </a>
                     </div>
                     <h4><a href="#" style="text-decoration:none;"><strong>{{ user.s2d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i></i></a></small></small></h4>
@@ -232,7 +234,7 @@ body {font-family: "Lato", sans-serif}
                 <div class="panel-body">
                     <div class="pull-left">
                         <a href="#">
-                            <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                            <img class="media-object img-circle" src="{{ user.photo }}" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                         </a>
                     </div>
                     <h4><a href="#" style="text-decoration:none;"><strong>{{ user.y3d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> </i></a></small></small></h4>
@@ -256,7 +258,7 @@ body {font-family: "Lato", sans-serif}
                 <div class="panel-body">
                     <div class="pull-left">
                         <a href="#">
-                            <img class="media-object img-circle" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTcnh5jHKA1w66fkB5g3V_GKnZmENDBpYmPjwfh3UAohdT-oRZraW2GjmOC" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                            <img class="media-object img-circle" src="{{ user.photo }}" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                         </a>
                     </div>
                     <h4><a href="#" style="text-decoration:none;"><strong>{{ user.s3d }}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i></i></a></small></small></h4>
@@ -274,6 +276,13 @@ body {font-family: "Lato", sans-serif}
 
                 </div>
             </div>
+
+            {% endif %}
+
+
+            {% if user.twitter_id != "" %}
+
+            <a class="twitter-timeline" data-width="450" data-height="1000" data-theme="dark" data-link-color="#2B7BB9" href="https://twitter.com/{{ user.twitter_id }}">Tweets by {{ user.twitter_id }}</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
             {% endif %}
 
@@ -307,6 +316,10 @@ body {font-family: "Lato", sans-serif}
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+
+<script>(function() { var s = document.createElement("script");s.async = true;s.onload = s.onreadystatechange = function(){getYelpWidget("{{ user.yelp_id }}","300","RED","y","y","2");};s.src='http://chrisawren.com/widgets/yelp/yelpv2.js' ;var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();</script>
+
+<script>(function() { var s = document.createElement("script");s.async = true;s.onload = s.onreadystatechange = function(){getYelpWidget("{{ user.yelp_id }}","350","RED","y","y","1");};s.src='http://chrisawren.com/widgets/yelp/yelpv2.js' ;var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();</script>
 <div class="mainbody container-fluid" style="float:center">
     <div class="row">
        
@@ -360,13 +373,24 @@ body {font-family: "Lato", sans-serif}
             <hr>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="pull-left">
-                    <h3>Getting Here</h3>
-                    <div id="map"></div>
-                    <script>
-                      function initMap() {
-                        var latitude = 40.7128;
-                        var longitude = -74.0059;
+
+                <div style="border:1px solid black; float: left" id='yelpwidget'></div>
+                
+                <div id="map" style="float: right; width: 500px"></div>
+                <script>
+                  function initMap() {
+                    var latitude = 43;
+                    var longitude = 70;
+
+                    var address = "{{ user.map_location }}";
+                    geocoder = new google.maps.Geocoder();
+                    geocoder.geocode( { 'address': address}, function(results, status) {
+                      if (status == google.maps.GeocoderStatus.OK) {
+                         latitude = results[0].geometry.location.lat();
+                         longitude = results[0].geometry.location.lng();
+                         console.log(latitude);
+
+
                         var uluru = {lat: latitude, lng: longitude};
                         var map = new google.maps.Map(document.getElementById('map'), {
                           zoom: 10,
@@ -376,17 +400,48 @@ body {font-family: "Lato", sans-serif}
                           position: uluru,
                           map: map
                         });
-                      }
-                    </script>
-                    <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7xk58gwzSafN_KR7ySF5dRtVKafcMapk&callback=initMap">
-                    </script>
+
+                        }
+
+                        else {
+
+                        var uluru = {lat: latitude, lng: longitude};
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                          zoom: 10,
+                          center: uluru
+                        });
+                        var marker = new google.maps.Marker({
+                          position: uluru,
+                          map: map
+                        });
+
+                        }
+
+                    });
+                    console.log("yay 2");
+                  }
+                </script>
+                <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7xk58gwzSafN_KR7ySF5dRtVKafcMapk&callback=initMap">
+                </script>
+
+
                 </div>
             </div>
 
 
         </div>
+
+        {% if user.twitter_id != "" %}
+        <div align="center">
+            <a class="twitter-timeline" data-width="750" data-height="1000" data-theme="white" data-link-color="#2B7BB9" href="https://twitter.com/{{ user.twitter_id }}">Tweets by {{ user.twitter_id }}</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+            {% endif %}
+
     </div>
+
+
+
 </div>
 
 

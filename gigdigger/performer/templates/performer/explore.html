@@ -5,7 +5,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>(function() { var s = document.createElement("script");s.async = true;s.onload = s.onreadystatechange = function(){getYelpWidget("{{ performer.yelp_id }}","300","RED","y","y","2");};s.src='http://chrisawren.com/widgets/yelp/yelpv2.js' ;var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();</script>
 
+<script>(function() { var s = document.createElement("script");s.async = true;s.onload = s.onreadystatechange = function(){getYelpWidget("{{ performer.yelp_id }}","350","RED","y","y","1");};s.src='http://chrisawren.com/widgets/yelp/yelpv2.js' ;var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})();</script>
 </head>
 <title>Gigdigger</title>
 <meta charset="UTF-8">
@@ -16,7 +18,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
+#map {
+        height: 400px;
+        width: 400%;
+       }
 </style>
 <body>
 
@@ -103,13 +108,24 @@ body {font-family: "Lato", sans-serif}
             <hr>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="pull-left">
-                    <h3>Getting Here</h3>
-                    <div id="map"></div>
-                    <script>
-                      function initMap() {
-                        var latitude = 40.7128;
-                        var longitude = -74.0059;
+
+                <div style="border:1px solid black; float: left" id='yelpwidget'></div>
+                
+                <div id="map" style="float: right; width: 500px"></div>
+                <script>
+                  function initMap() {
+                    var latitude = 43;
+                    var longitude = 70;
+
+                    var address = "{{ performer.map_location }}";
+                    geocoder = new google.maps.Geocoder();
+                    geocoder.geocode( { 'address': address}, function(results, status) {
+                      if (status == google.maps.GeocoderStatus.OK) {
+                         latitude = results[0].geometry.location.lat();
+                         longitude = results[0].geometry.location.lng();
+                         console.log(latitude);
+
+
                         var uluru = {lat: latitude, lng: longitude};
                         var map = new google.maps.Map(document.getElementById('map'), {
                           zoom: 10,
@@ -119,13 +135,43 @@ body {font-family: "Lato", sans-serif}
                           position: uluru,
                           map: map
                         });
-                      }
-                    </script>
-                    <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7xk58gwzSafN_KR7ySF5dRtVKafcMapk&callback=initMap">
-                    </script>
+
+                        }
+
+                        else {
+
+                        var uluru = {lat: latitude, lng: longitude};
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                          zoom: 10,
+                          center: uluru
+                        });
+                        var marker = new google.maps.Marker({
+                          position: uluru,
+                          map: map
+                        });
+
+                        }
+
+                    });
+
+                  }
+                </script>
+                <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7xk58gwzSafN_KR7ySF5dRtVKafcMapk&callback=initMap">
+                </script>
+
+
                 </div>
             </div>
+
+
+        </div>
+
+        {% if performer.twitter_id != "" %}
+        <div align="center">
+            <a class="twitter-timeline" data-width="750" data-height="1000" data-theme="white" data-link-color="#2B7BB9" href="https://twitter.com/{{ performer.twitter_id }}">Tweets by {{ performer.twitter_id }}</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+            {% endif %}
 
 
         </div>
